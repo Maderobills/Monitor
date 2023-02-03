@@ -64,15 +64,22 @@ public class Registration extends AppCompatActivity {
                     return;
                 }
 
+                mDialog.setMessage("Processing...");
+
                 mAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
                         if (task.isSuccessful()){
 
+                            mDialog.dismiss();
                             Toast.makeText(Registration.this, "Registration complete", Toast.LENGTH_SHORT).show();
 
+                            startActivity(new Intent(getApplicationContext(),HomeActivity.class));
+
                         }else {
+
+                            mDialog.dismiss();
                             Toast.makeText(Registration.this, "Registration Failed...!", Toast.LENGTH_SHORT).show();
                         }
 
