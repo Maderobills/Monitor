@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "271753930798",
+    "project_id": "monitor-8054a",
+    "storage_bucket": "monitor-8054a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:271753930798:android:9c58f2876ae93e42a2d7bf",
+        "android_client_info": {
+          "package_name": "com.example.monitor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "271753930798-7nd1e5h6snb1gscobltqvf1dovc000u6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmkOWA3KTBOsU6q7dNYvjL_50_pSC1CSg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "271753930798-7nd1e5h6snb1gscobltqvf1dovc000u6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
