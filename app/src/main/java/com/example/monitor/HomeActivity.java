@@ -21,6 +21,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private BottomNavigationView bottomNavigationView;
     private FrameLayout frameLayout;
 
+    private DashboardFragment dashboardFragment;
+    private IncomeFragment incomeFragment;
+    private ExpenseFragment expenseFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +34,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         toolbar.setTitle("Expense Manager");
         setSupportActionBar(toolbar);
 
+
+        bottomNavigationView = findViewById(R.id.bottomNavigationbar);
+        frameLayout = findViewById(R.id.main_frame);
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle
@@ -41,9 +48,39 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = findViewById(R.id.naView);
         navigationView.setNavigationItemSelectedListener(this);
 
-        bottomNavigationView = findViewById(R.id.bottomNavigationbar);
-        frameLayout = findViewById(R.id.main_frame);
+        dashboardFragment = new DashboardFragment();
+        incomeFragment = new IncomeFragment();
+        expenseFragment = new ExpenseFragment();
+        setFragment(dashboardFragment);
 
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                displaySelectedListener(item.getItemId());
+                switch (item.getItemId()) {
+
+                    case R.id.dashboard:
+                        setFragment(dashboardFragment);
+                        bottomNavigationView.setItemBackgroundResource(R.color.dashboard_color);
+                        return true;
+
+                    case R.id.income:
+                        setFragment(incomeFragment);
+                        bottomNavigationView.setItemBackgroundResource(R.color.income_color);
+                        return true;
+
+                    case R.id.expense:
+                        setFragment(expenseFragment);
+                        bottomNavigationView.setItemBackgroundResource(R.color.expense_color);
+                        return true;
+
+                    default:
+                        return false;
+                }
+            }
+
+        });
     }
 
     @Override
@@ -57,8 +94,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             super.onBackPressed();
         }
 
-        super.onBackPressed();
-
     }
 
     public void displaySelectedListener(int itemId) {
@@ -67,12 +102,15 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         switch (itemId) {
             case R.id.dashboard:
+                fragment = new DashboardFragment();
                 break;
 
             case R.id.income:
+                fragment = new IncomeFragment();
                 break;
 
             case R.id.expense:
+                fragment = new ExpenseFragment();
                 break;
         }
 
@@ -87,31 +125,19 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        displaySelectedListener(item.getItemId()) {
-            switch (item.getItemId()) {
 
-                case R.id.dashboard:
+    private void setFragment(Fragment fragment) {
 
-                    bottomNavigationView.setItemBackgroundResource(R.color.dashboard_color);
-                    return true;
-
-                case R.id.income:
-
-                    bottomNavigationView.setItemBackgroundResource(R.color.income_color);
-                    return true;
-
-                case R.id.expense:
-
-                    bottomNavigationView.setItemBackgroundResource(R.color.expense_color);
-                    return true;
-
-                default:
-                    return false;
-            }
-        }
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.main_frame,fragment);
+        fragmentTransaction.commit();
 
     }
 
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        displaySelectedListener(item.getItemId());
+        return true;
+    }
 }
