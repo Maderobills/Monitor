@@ -19,7 +19,7 @@
         app:itemTextColor="#FFF"
         app:itemTextAppearance="?android:textAppearanceSmall"
         android:layout_gravity="start"
-        android:background="@color/black"
+        android:background="#99000000"
         android:id="@+id/naView"
         android:fitsSystemWindows="true"
         app:menu="@menu/navmenu"
