@@ -1,6 +1,8 @@
 package Model;
 
-public class Data {
+import androidx.recyclerview.widget.RecyclerView;
+
+public class Data extends RecyclerView.ViewHolder {
 
     private int amount;
     private String type, note, id, date;
